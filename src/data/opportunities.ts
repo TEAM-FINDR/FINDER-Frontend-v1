@@ -10,6 +10,14 @@ export interface Opportunity {
   missingConditions: number
   region: string
   summary: { who: string; when: string; how: string }
+  detail?: {
+    period: string
+    tags: string[]
+    overview: { label: string; value: string }[]
+    program: { day: string; title: string; desc: string }[]
+    contacts: { type: 'phone' | 'email' | 'site'; value: string }[]
+    applyNote: string
+  }
 }
 
 export const opportunities: Opportunity[] = [
@@ -71,6 +79,36 @@ export const opportunities: Opportunity[] = [
       who: '광주에 사는 만 14~19세',
       when: '10월 24~26일 (2박 3일)',
       how: '10월 8일까지 신청서 1장 내기',
+    },
+    detail: {
+      period: '모집 2026.10.01 ~ 10.08',
+      tags: ['광주', '오프라인'],
+      overview: [
+        {
+          label: '모집 대상',
+          value: '광주광역시 거주 또는 재학 중인 만 14~19세 (학교 밖 청소년 포함)',
+        },
+        { label: '모집 인원', value: '40명 · 선착순 아님, 서류 검토 후 선발' },
+        { label: '캠프 일정', value: '2026.10.24(금) ~ 10.26(일) · 2박 3일' },
+        { label: '장소', value: '광주 AI 융합 캠퍼스 · 숙식 제공' },
+        { label: '참가비', value: '무료 (교통비 일부 지원)' },
+        { label: '제출 서류', value: '참가 신청서 1부, 보호자 동의서 1부' },
+      ],
+      program: [
+        {
+          day: '1일차',
+          title: 'AI 기초와 데이터 다루기',
+          desc: '파이썬으로 데이터 정리하기 · 팀 구성',
+        },
+        { day: '2일차', title: '팀 프로젝트', desc: '지역 문제를 AI로 풀어보는 미니 프로젝트' },
+        { day: '3일차', title: '발표와 수료', desc: '팀별 발표 · 현직 개발자 피드백 · 수료증' },
+      ],
+      contacts: [
+        { type: 'phone', value: '062-000-0000 · 평일 9시~18시' },
+        { type: 'email', value: 'ai-camp@gen.go.kr' },
+        { type: 'site', value: '광주광역시교육청 공식 홈페이지' },
+      ],
+      applyNote: '신청은 광주광역시교육청 사이트에서 진행돼요',
     },
   },
   {
