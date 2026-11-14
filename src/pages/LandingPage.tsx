@@ -6,6 +6,7 @@ import LandingHeader from '@/components/layout/LandingHeader'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
+import { usePageMotion } from '@/lib/usePageMotion'
 
 const purposeOptions = [
   { title: '지금 바로 지원할 곳을 찾아요', desc: '마감 임박·지금 가능한 기회부터' },
@@ -145,7 +146,7 @@ const faqs = [
 ]
 
 function Reveal({ children }: { children: ReactNode }) {
-  return <div className="reveal-on-scroll">{children}</div>
+  return <div data-reveal>{children}</div>
 }
 
 function Eyebrow({ children }: { children: string }) {
@@ -161,7 +162,7 @@ function Hero() {
   return (
     <section className="bg-surface pt-24 pb-20">
       <Container>
-        <div className="animate-fade-up">
+        <div data-reveal>
           <Eyebrow>청소년 교육·공모전·장학금 기회 찾기</Eyebrow>
           <h1 className="mt-6 text-[56px] leading-[1.25] font-bold tracking-tight">
             같은 기회도
@@ -178,7 +179,7 @@ function Hero() {
           </Link>
         </div>
 
-        <div className="animate-fade-up" style={{ animationDelay: '140ms' }}>
+        <div data-reveal>
           <div className="bg-page mt-14 rounded-3xl p-10">
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
               <div className="bg-surface rounded-2xl p-7">
@@ -286,7 +287,7 @@ function Steps() {
 
           <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step) => (
-              <li key={step.no} className="bg-page flex flex-col rounded-2xl p-7">
+              <li key={step.no} data-reveal className="bg-page flex flex-col rounded-2xl p-7">
                 <p className="text-primary text-sm font-bold">{step.no}</p>
                 <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
                 <p className="text-ink-muted mt-3 text-sm leading-relaxed">{step.desc}</p>
@@ -325,6 +326,7 @@ function Modes() {
             {modes.map((mode, index) => (
               <li
                 key={mode.no}
+                data-reveal
                 className={cn('bg-surface rounded-2xl p-7', index === 1 && 'sm:mt-10')}
               >
                 <p className="text-ink-muted text-sm font-semibold">{mode.no}</p>
@@ -363,7 +365,7 @@ function Comparison() {
           </p>
 
           <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            <div className="bg-page rounded-2xl p-6">
+            <div data-reveal className="bg-page rounded-2xl p-6">
               <h3 className="font-bold">바로 지원 모드</h3>
               <p className="text-ink-muted mt-1 text-xs">마감과 지원 버튼이 먼저</p>
               <div className="bg-surface mt-5 rounded-xl p-5">
@@ -377,7 +379,7 @@ function Comparison() {
               </div>
             </div>
 
-            <div className="bg-page rounded-2xl p-6">
+            <div data-reveal className="bg-page rounded-2xl p-6">
               <h3 className="font-bold">준비 모드</h3>
               <p className="text-ink-muted mt-1 text-xs">내 조건과 할 일이 먼저</p>
               <div className="bg-surface mt-5 rounded-xl p-5">
@@ -396,7 +398,7 @@ function Comparison() {
               </div>
             </div>
 
-            <div className="bg-page rounded-2xl p-6">
+            <div data-reveal className="bg-page rounded-2xl p-6">
               <h3 className="font-bold">간단히 보기</h3>
               <p className="text-ink-muted mt-1 text-xs">세 줄과 큰 글씨</p>
               <div className="bg-surface mt-5 rounded-xl p-5">
@@ -437,9 +439,9 @@ function Stats() {
 
           <dl className="grid grid-cols-3 gap-6">
             {stats.map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} data-reveal>
                 <dd className="text-6xl font-bold">
-                  {stat.value}
+                  <span data-count>{stat.value}</span>
                   <span className="ml-1 text-xl">{stat.unit}</span>
                 </dd>
                 <dt className="text-ink-muted mt-3 text-sm">{stat.label}</dt>
@@ -469,7 +471,7 @@ function Personas() {
 
           <ul className="space-y-5">
             {personas.map((persona) => (
-              <li key={persona.tag} className="bg-surface rounded-2xl p-7">
+              <li key={persona.tag} data-reveal className="bg-surface rounded-2xl p-7">
                 <p className="text-primary text-xs font-bold">{persona.tag}</p>
                 <h3 className="mt-2 text-xl font-bold">{persona.title}</h3>
                 <p className="text-ink-muted mt-3 text-sm leading-relaxed">{persona.desc}</p>
@@ -589,8 +591,11 @@ function Footer() {
 }
 
 export default function LandingPage() {
+  const motionRoot = usePageMotion()
+
   return (
-    <div className="min-h-screen">
+    <div ref={motionRoot} className="motion-root min-h-screen">
+      <div className="scroll-progress" aria-hidden />
       <LandingHeader />
       <main>
         <Hero />
