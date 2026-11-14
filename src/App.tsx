@@ -17,6 +17,7 @@ export default function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/opportunities/:id" element={<OpportunityDetailPage />} />
+          <Route path="/my/settings" element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
