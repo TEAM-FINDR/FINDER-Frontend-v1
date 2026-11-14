@@ -4,6 +4,7 @@ import ExplorePage from '@/pages/ExplorePage'
 import HomePage from '@/pages/HomePage'
 import LandingPage from '@/pages/LandingPage'
 import OnboardingPage from '@/pages/OnboardingPage'
+import SettingsPage from '@/pages/SettingsPage'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/my/settings" element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
