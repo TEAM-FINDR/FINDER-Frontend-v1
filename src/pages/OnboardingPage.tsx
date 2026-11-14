@@ -41,7 +41,7 @@ export default function OnboardingPage() {
     <div className="bg-page min-h-screen">
       <Container className="flex h-20 items-center">
         <Link to="/" className="text-xl font-bold">
-          Finder
+          FINDR
         </Link>
         <Link to="/home" className="text-ink-muted hover:text-ink ml-auto text-sm">
           나중에 할게요
@@ -64,7 +64,7 @@ export default function OnboardingPage() {
         <p className="text-ink-muted mt-9 flex items-center gap-2 text-sm">
           <span className="bg-primary size-1.5 rounded-full" aria-hidden />1 / 3 · 이용 목적
         </p>
-        <h1 className="mt-4 text-4xl font-bold">Finder를 어떤 목적으로 쓰실 건가요?</h1>
+        <h1 className="mt-4 text-4xl font-bold">FINDR를 어떤 목적으로 쓰실 건가요?</h1>
         <p className="text-ink-muted mt-4 text-sm">
           고른 목적에 맞춰 홈에서 먼저 보이는 것이 달라져요. 나중에 언제든 바꿀 수 있어요.
         </p>

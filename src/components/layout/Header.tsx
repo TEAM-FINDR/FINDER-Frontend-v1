@@ -16,7 +16,7 @@ export default function Header() {
     <header className="bg-surface">
       <Container className="flex h-16 items-center">
         <Link to="/home" className="text-xl font-bold">
-          Finder
+          FINDR
         </Link>
 
         <nav className="ml-8 flex items-center gap-1" aria-label="주요 메뉴">
