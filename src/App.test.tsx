@@ -1,34 +1,14 @@
 import { render, screen } from '@testing-library/react'
-import { MemoryRouter, Navigate, Route, Routes } from 'react-router-dom'
-import AppLayout from '@/components/layout/AppLayout'
-import ExplorePage from '@/pages/ExplorePage'
-import HomePage from '@/pages/HomePage'
-import LandingPage from '@/pages/LandingPage'
-import OnboardingPage from '@/pages/OnboardingPage'
-import OpportunityDetailPage from '@/pages/OpportunityDetailPage'
-import SavedPage from '@/pages/SavedPage'
-import SettingsPage from '@/pages/SettingsPage'
+import App from './App'
 
 function renderAt(path: string) {
-  render(
-    <MemoryRouter initialEntries={[path]}>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/onboarding" element={<OnboardingPage />} />
-        <Route element={<AppLayout />}>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/opportunities/:id" element={<OpportunityDetailPage />} />
-          <Route path="/saved" element={<SavedPage />} />
-          <Route path="/my/settings" element={<SettingsPage />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </MemoryRouter>,
-  )
+  window.history.pushState(null, '', path)
+  render(<App />)
 }
 
 test.each([
+  ['/', '같은 기회도'],
+  ['/onboarding', 'Finder를 어떤 목적으로 쓰실 건가요?'],
   ['/home', '시우님이 지금 지원할 수 있는 기회예요'],
   ['/explore', '기회 탐색'],
   ['/saved', '이번 달 마감 일정'],
@@ -37,4 +17,10 @@ test.each([
   renderAt(path)
 
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(heading)
+})
+
+test('기회 상세 경로가 열린다', () => {
+  renderAt('/opportunities/gwangju-youth-ai-camp')
+
+  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('광주 청소년 AI 캠프')
 })
