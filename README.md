@@ -2,7 +2,7 @@
 
 FINDR 웹 프론트엔드 저장소입니다.
 
-![CI](https://github.com/TEAM-FINDR/FINDER-Frontend-v1/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/TEAM-FINDR/FINDR-Frontend-v1/actions/workflows/ci.yml/badge.svg)
 
 ## 기술 스택
 
