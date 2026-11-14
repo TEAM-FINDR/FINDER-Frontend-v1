@@ -1,6 +1,6 @@
-# FINDER-Frontend-v1
+# FINDR Frontend
 
-FINDER 웹 프론트엔드 저장소입니다.
+FINDR 웹 프론트엔드 저장소입니다.
 
 ![CI](https://github.com/TEAM-FINDR/FINDER-Frontend-v1/actions/workflows/ci.yml/badge.svg)
 

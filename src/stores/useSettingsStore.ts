@@ -28,6 +28,6 @@ export const useSettingsStore = create<SettingsState>()(
       setFontSize: (fontSize) => set({ fontSize }),
       completeOnboarding: () => set({ onboarded: true }),
     }),
-    { name: 'finder-settings' },
+    { name: 'findr-settings' },
   ),
 )
