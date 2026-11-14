@@ -157,7 +157,7 @@ export default function ExplorePage() {
         </Card>
 
         {selected && (
-          <Card className="h-fit">
+          <Card key={selected.id} className="animate-fade-up h-fit">
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-2">
                 <Badge>{selected.category}</Badge>
