@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Check, ChevronRight, Minus, Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import Container from '@/components/layout/Container'
@@ -144,6 +144,10 @@ const faqs = [
   },
 ]
 
+function Reveal({ children }: { children: ReactNode }) {
+  return <div className="reveal-on-scroll">{children}</div>
+}
+
 function Eyebrow({ children }: { children: string }) {
   return (
     <p className="text-ink-muted flex items-center gap-2 text-sm">
@@ -157,106 +161,110 @@ function Hero() {
   return (
     <section className="bg-surface pt-24 pb-20">
       <Container>
-        <Eyebrow>청소년 교육·공모전·장학금 기회 찾기</Eyebrow>
-        <h1 className="mt-6 text-[56px] leading-[1.25] font-bold tracking-tight">
-          같은 기회도
-          <br />
-          <span className="text-ink-muted/70">사람마다 다르게 보여야 하니까</span>
-        </h1>
-        <p className="text-ink-muted mt-6 text-base leading-relaxed">
-          지금 바로 지원할 곳이 필요한 사람, 앞으로를 준비하는 사람, 그냥 둘러보고 싶은 사람
-          <br />
-          Finder는 처음에 목적을 묻고, 그에 맞게 홈 화면과 보는 방식을 바꿔요.
-        </p>
-        <Link to="/home" className="mt-9 inline-block">
-          <Button size="lg">내 목적 고르고 시작하기</Button>
-        </Link>
+        <div className="animate-fade-up">
+          <Eyebrow>청소년 교육·공모전·장학금 기회 찾기</Eyebrow>
+          <h1 className="mt-6 text-[56px] leading-[1.25] font-bold tracking-tight">
+            같은 기회도
+            <br />
+            <span className="text-ink-muted/70">사람마다 다르게 보여야 하니까</span>
+          </h1>
+          <p className="text-ink-muted mt-6 text-base leading-relaxed">
+            지금 바로 지원할 곳이 필요한 사람, 앞으로를 준비하는 사람, 그냥 둘러보고 싶은 사람
+            <br />
+            Finder는 처음에 목적을 묻고, 그에 맞게 홈 화면과 보는 방식을 바꿔요.
+          </p>
+          <Link to="/home" className="mt-9 inline-block">
+            <Button size="lg">내 목적 고르고 시작하기</Button>
+          </Link>
+        </div>
 
-        <div className="bg-page mt-14 rounded-3xl p-10">
-          <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
-            <div className="bg-surface rounded-2xl p-7">
-              <Eyebrow>처음 한 번만 물어봐요</Eyebrow>
-              <h2 className="mt-4 text-xl leading-snug font-bold">
-                Finder를 어떤 목적으로
-                <br />
-                쓰실 건가요?
-              </h2>
-              <ul className="mt-5">
-                {purposeOptions.map((option, index) => (
-                  <li
-                    key={option.title}
-                    className={cn(
-                      'flex items-center justify-between py-4',
-                      index > 0 && 'border-line border-t',
-                    )}
-                  >
-                    <div>
-                      <p
+        <div className="animate-fade-up" style={{ animationDelay: '140ms' }}>
+          <div className="bg-page mt-14 rounded-3xl p-10">
+            <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto_1fr]">
+              <div className="bg-surface rounded-2xl p-7">
+                <Eyebrow>처음 한 번만 물어봐요</Eyebrow>
+                <h2 className="mt-4 text-xl leading-snug font-bold">
+                  Finder를 어떤 목적으로
+                  <br />
+                  쓰실 건가요?
+                </h2>
+                <ul className="mt-5">
+                  {purposeOptions.map((option, index) => (
+                    <li
+                      key={option.title}
+                      className={cn(
+                        'flex items-center justify-between py-4',
+                        index > 0 && 'border-line border-t',
+                      )}
+                    >
+                      <div>
+                        <p
+                          className={cn(
+                            'text-sm font-semibold',
+                            index === 0 ? 'text-primary' : 'text-ink',
+                          )}
+                        >
+                          {option.title}
+                        </p>
+                        <p className="text-ink-muted mt-1 text-xs">{option.desc}</p>
+                      </div>
+                      <span
                         className={cn(
-                          'text-sm font-semibold',
-                          index === 0 ? 'text-primary' : 'text-ink',
+                          'flex size-5 shrink-0 items-center justify-center rounded-full',
+                          index === 0 ? 'bg-primary text-white' : 'border-line border',
+                        )}
+                        aria-hidden
+                      >
+                        {index === 0 && <Check size={12} strokeWidth={3} />}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="text-ink-muted flex flex-col items-center gap-2">
+                <ChevronRight size={24} aria-hidden />
+                <span className="text-xs">바로 바뀌어요</span>
+              </div>
+
+              <div className="bg-surface rounded-2xl p-7">
+                <div className="flex items-center justify-between">
+                  <Eyebrow>바로 지원 모드 홈</Eyebrow>
+                  <span className="text-ink-muted text-xs">마감 순 정렬</span>
+                </div>
+                <h2 className="mt-4 text-xl font-bold">시우님이 지금 지원할 수 있는 기회 4개</h2>
+                <p className="bg-warning-soft text-warning mt-5 rounded-lg px-4 py-3 text-xs">
+                  3일 안에 마감되는 기회가 2개 있어요. 맨 위에 올려뒀어요.
+                </p>
+                <ul className="mt-2">
+                  {previewOpportunities.map((item, index) => (
+                    <li
+                      key={item.title}
+                      className={cn(
+                        'flex items-center gap-4 py-4',
+                        index > 0 && 'border-line border-t',
+                      )}
+                    >
+                      <div className="min-w-0 flex-1">
+                        <Badge>{item.category}</Badge>
+                        <p className="mt-2 truncate text-sm font-bold">{item.title}</p>
+                        <p className="text-ink-muted mt-1 truncate text-xs">
+                          {item.org} · {item.due}
+                        </p>
+                      </div>
+                      <span
+                        className={cn(
+                          'text-sm font-bold',
+                          item.urgent ? 'text-danger' : 'text-primary',
                         )}
                       >
-                        {option.title}
-                      </p>
-                      <p className="text-ink-muted mt-1 text-xs">{option.desc}</p>
-                    </div>
-                    <span
-                      className={cn(
-                        'flex size-5 shrink-0 items-center justify-center rounded-full',
-                        index === 0 ? 'bg-primary text-white' : 'border-line border',
-                      )}
-                      aria-hidden
-                    >
-                      {index === 0 && <Check size={12} strokeWidth={3} />}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="text-ink-muted flex flex-col items-center gap-2">
-              <ChevronRight size={24} aria-hidden />
-              <span className="text-xs">바로 바뀌어요</span>
-            </div>
-
-            <div className="bg-surface rounded-2xl p-7">
-              <div className="flex items-center justify-between">
-                <Eyebrow>바로 지원 모드 홈</Eyebrow>
-                <span className="text-ink-muted text-xs">마감 순 정렬</span>
+                        {item.dday}
+                      </span>
+                      <Button size="sm">지원하기</Button>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h2 className="mt-4 text-xl font-bold">시우님이 지금 지원할 수 있는 기회 4개</h2>
-              <p className="bg-warning-soft text-warning mt-5 rounded-lg px-4 py-3 text-xs">
-                3일 안에 마감되는 기회가 2개 있어요. 맨 위에 올려뒀어요.
-              </p>
-              <ul className="mt-2">
-                {previewOpportunities.map((item, index) => (
-                  <li
-                    key={item.title}
-                    className={cn(
-                      'flex items-center gap-4 py-4',
-                      index > 0 && 'border-line border-t',
-                    )}
-                  >
-                    <div className="min-w-0 flex-1">
-                      <Badge>{item.category}</Badge>
-                      <p className="mt-2 truncate text-sm font-bold">{item.title}</p>
-                      <p className="text-ink-muted mt-1 truncate text-xs">
-                        {item.org} · {item.due}
-                      </p>
-                    </div>
-                    <span
-                      className={cn(
-                        'text-sm font-bold',
-                        item.urgent ? 'text-danger' : 'text-primary',
-                      )}
-                    >
-                      {item.dday}
-                    </span>
-                    <Button size="sm">지원하기</Button>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
         </div>
@@ -268,24 +276,26 @@ function Hero() {
 function Steps() {
   return (
     <section id="intro" className="bg-surface py-24">
-      <Container>
-        <Eyebrow>이용 흐름</Eyebrow>
-        <h2 className="mt-5 text-4xl font-bold">세 단계면 나에게 맞는 홈이 돼요</h2>
-        <p className="text-ink-muted mt-4">
-          가입하고 처음 한 번만 고르면 돼요. 마음이 바뀌면 MY에서 언제든 다시 골라요.
-        </p>
+      <Reveal>
+        <Container>
+          <Eyebrow>이용 흐름</Eyebrow>
+          <h2 className="mt-5 text-4xl font-bold">세 단계면 나에게 맞는 홈이 돼요</h2>
+          <p className="text-ink-muted mt-4">
+            가입하고 처음 한 번만 고르면 돼요. 마음이 바뀌면 MY에서 언제든 다시 골라요.
+          </p>
 
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step) => (
-            <li key={step.no} className="bg-page flex flex-col rounded-2xl p-7">
-              <p className="text-primary text-sm font-bold">{step.no}</p>
-              <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
-              <p className="text-ink-muted mt-3 text-sm leading-relaxed">{step.desc}</p>
-              <p className="text-ink-muted mt-auto pt-12 text-xs font-semibold">{step.meta}</p>
-            </li>
-          ))}
-        </ul>
-      </Container>
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step) => (
+              <li key={step.no} className="bg-page flex flex-col rounded-2xl p-7">
+                <p className="text-primary text-sm font-bold">{step.no}</p>
+                <h3 className="mt-4 text-lg font-bold">{step.title}</h3>
+                <p className="text-ink-muted mt-3 text-sm leading-relaxed">{step.desc}</p>
+                <p className="text-ink-muted mt-auto pt-12 text-xs font-semibold">{step.meta}</p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -293,44 +303,46 @@ function Steps() {
 function Modes() {
   return (
     <section id="modes" className="py-24">
-      <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <Eyebrow>목적별 이용</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-snug font-bold">
-            처음에 목적부터
-            <br />
-            물어봐요
-          </h2>
-          <p className="text-ink-muted mt-5 text-sm leading-relaxed">
-            기능은 같아도 쓰는 이유는 사람마다 달라요.
-            <br />
-            고른 목적에 따라 홈에서 먼저 보이는 것이 바뀌고,
-            <br />
-            언제든 다시 고를 수 있어요.
-          </p>
-        </div>
+      <Reveal>
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <Eyebrow>목적별 이용</Eyebrow>
+            <h2 className="mt-5 text-4xl leading-snug font-bold">
+              처음에 목적부터
+              <br />
+              물어봐요
+            </h2>
+            <p className="text-ink-muted mt-5 text-sm leading-relaxed">
+              기능은 같아도 쓰는 이유는 사람마다 달라요.
+              <br />
+              고른 목적에 따라 홈에서 먼저 보이는 것이 바뀌고,
+              <br />
+              언제든 다시 고를 수 있어요.
+            </p>
+          </div>
 
-        <ul className="grid gap-5 sm:grid-cols-2">
-          {modes.map((mode, index) => (
-            <li
-              key={mode.no}
-              className={cn('bg-surface rounded-2xl p-7', index === 1 && 'sm:mt-10')}
-            >
-              <p className="text-ink-muted text-sm font-semibold">{mode.no}</p>
-              <h3 className="mt-3 text-xl font-bold">{mode.title}</h3>
-              <p className="text-ink-muted mt-2 text-sm">{mode.subtitle}</p>
-              <ul className="mt-6 space-y-3">
-                {mode.items.map((item) => (
-                  <li key={item} className="text-ink-muted flex gap-2 text-sm">
-                    <span className="text-line">•</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </Container>
+          <ul className="grid gap-5 sm:grid-cols-2">
+            {modes.map((mode, index) => (
+              <li
+                key={mode.no}
+                className={cn('bg-surface rounded-2xl p-7', index === 1 && 'sm:mt-10')}
+              >
+                <p className="text-ink-muted text-sm font-semibold">{mode.no}</p>
+                <h3 className="mt-3 text-xl font-bold">{mode.title}</h3>
+                <p className="text-ink-muted mt-2 text-sm">{mode.subtitle}</p>
+                <ul className="mt-6 space-y-3">
+                  {mode.items.map((item) => (
+                    <li key={item} className="text-ink-muted flex gap-2 text-sm">
+                      <span className="text-line">•</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -338,68 +350,70 @@ function Modes() {
 function Comparison() {
   return (
     <section className="bg-surface py-24">
-      <Container>
-        <Eyebrow>같은 기회, 다른 모습</Eyebrow>
-        <h2 className="mt-5 text-4xl leading-snug font-bold">
-          광주 청소년 AI 캠프는
-          <br />
-          이렇게 다르게 보여요
-        </h2>
-        <p className="text-ink-muted mt-5 text-sm">
-          정보는 같아요. 무엇을 먼저 보여줄지만 목적에 맞게 바꿔요.
-        </p>
+      <Reveal>
+        <Container>
+          <Eyebrow>같은 기회, 다른 모습</Eyebrow>
+          <h2 className="mt-5 text-4xl leading-snug font-bold">
+            광주 청소년 AI 캠프는
+            <br />
+            이렇게 다르게 보여요
+          </h2>
+          <p className="text-ink-muted mt-5 text-sm">
+            정보는 같아요. 무엇을 먼저 보여줄지만 목적에 맞게 바꿔요.
+          </p>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          <div className="bg-page rounded-2xl p-6">
-            <h3 className="font-bold">바로 지원 모드</h3>
-            <p className="text-ink-muted mt-1 text-xs">마감과 지원 버튼이 먼저</p>
-            <div className="bg-surface mt-5 rounded-xl p-5">
-              <div className="flex items-start justify-between">
-                <Badge>교육</Badge>
-                <span className="text-danger text-lg font-bold">D-7</span>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            <div className="bg-page rounded-2xl p-6">
+              <h3 className="font-bold">바로 지원 모드</h3>
+              <p className="text-ink-muted mt-1 text-xs">마감과 지원 버튼이 먼저</p>
+              <div className="bg-surface mt-5 rounded-xl p-5">
+                <div className="flex items-start justify-between">
+                  <Badge>교육</Badge>
+                  <span className="text-danger text-lg font-bold">D-7</span>
+                </div>
+                <p className="mt-3 text-sm font-bold">광주 청소년 AI 캠프</p>
+                <p className="text-ink-muted mt-1 text-xs">10월 8일 마감 · 신청서 1장</p>
+                <Button className="mt-4 w-full">지원하기</Button>
               </div>
-              <p className="mt-3 text-sm font-bold">광주 청소년 AI 캠프</p>
-              <p className="text-ink-muted mt-1 text-xs">10월 8일 마감 · 신청서 1장</p>
-              <Button className="mt-4 w-full">지원하기</Button>
             </div>
-          </div>
 
-          <div className="bg-page rounded-2xl p-6">
-            <h3 className="font-bold">준비 모드</h3>
-            <p className="text-ink-muted mt-1 text-xs">내 조건과 할 일이 먼저</p>
-            <div className="bg-surface mt-5 rounded-xl p-5">
-              <p className="text-sm font-bold">광주 청소년 AI 캠프</p>
-              <ul className="mt-4 space-y-2">
-                {conditions.map((condition) => (
-                  <li key={condition.label} className="flex justify-between text-xs">
-                    <span className="text-ink-muted">{condition.label}</span>
-                    <span className="text-success font-semibold">충족</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-primary mt-4 text-xs font-semibold">
-                준비할 것 없이 바로 지원할 수 있어요
-              </p>
+            <div className="bg-page rounded-2xl p-6">
+              <h3 className="font-bold">준비 모드</h3>
+              <p className="text-ink-muted mt-1 text-xs">내 조건과 할 일이 먼저</p>
+              <div className="bg-surface mt-5 rounded-xl p-5">
+                <p className="text-sm font-bold">광주 청소년 AI 캠프</p>
+                <ul className="mt-4 space-y-2">
+                  {conditions.map((condition) => (
+                    <li key={condition.label} className="flex justify-between text-xs">
+                      <span className="text-ink-muted">{condition.label}</span>
+                      <span className="text-success font-semibold">충족</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-primary mt-4 text-xs font-semibold">
+                  준비할 것 없이 바로 지원할 수 있어요
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div className="bg-page rounded-2xl p-6">
-            <h3 className="font-bold">간단히 보기</h3>
-            <p className="text-ink-muted mt-1 text-xs">세 줄과 큰 글씨</p>
-            <div className="bg-surface mt-5 rounded-xl p-5">
-              <p className="text-sm font-bold">광주 청소년 AI 캠프</p>
-              <dl className="mt-4 space-y-2">
-                {summaryRows.map((row) => (
-                  <div key={row.label} className="flex gap-4 text-xs">
-                    <dt className="text-ink-muted w-10 shrink-0">{row.label}</dt>
-                    <dd className="font-semibold">{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
+            <div className="bg-page rounded-2xl p-6">
+              <h3 className="font-bold">간단히 보기</h3>
+              <p className="text-ink-muted mt-1 text-xs">세 줄과 큰 글씨</p>
+              <div className="bg-surface mt-5 rounded-xl p-5">
+                <p className="text-sm font-bold">광주 청소년 AI 캠프</p>
+                <dl className="mt-4 space-y-2">
+                  {summaryRows.map((row) => (
+                    <div key={row.label} className="flex gap-4 text-xs">
+                      <dt className="text-ink-muted w-10 shrink-0">{row.label}</dt>
+                      <dd className="font-semibold">{row.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -407,31 +421,33 @@ function Comparison() {
 function Stats() {
   return (
     <section className="bg-surface pb-24">
-      <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <h2 className="text-4xl leading-snug font-bold">
-            보는 방식도
-            <br />
-            편한 대로
-          </h2>
-          <p className="text-ink-muted mt-5 text-sm leading-relaxed">
-            같은 정보라도 세 줄 요약이 편한 사람, 전부 봐야 마음이 놓이는 사람이 있어요. 글자 크기와
-            알림 양도 직접 정해요.
-          </p>
-        </div>
+      <Reveal>
+        <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <h2 className="text-4xl leading-snug font-bold">
+              보는 방식도
+              <br />
+              편한 대로
+            </h2>
+            <p className="text-ink-muted mt-5 text-sm leading-relaxed">
+              같은 정보라도 세 줄 요약이 편한 사람, 전부 봐야 마음이 놓이는 사람이 있어요. 글자
+              크기와 알림 양도 직접 정해요.
+            </p>
+          </div>
 
-        <dl className="grid grid-cols-3 gap-6">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <dd className="text-6xl font-bold">
-                {stat.value}
-                <span className="ml-1 text-xl">{stat.unit}</span>
-              </dd>
-              <dt className="text-ink-muted mt-3 text-sm">{stat.label}</dt>
-            </div>
-          ))}
-        </dl>
-      </Container>
+          <dl className="grid grid-cols-3 gap-6">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <dd className="text-6xl font-bold">
+                  {stat.value}
+                  <span className="ml-1 text-xl">{stat.unit}</span>
+                </dd>
+                <dt className="text-ink-muted mt-3 text-sm">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -439,27 +455,29 @@ function Stats() {
 function Personas() {
   return (
     <section id="my-path" className="py-24">
-      <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <Eyebrow>이런 분들이 써요</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-snug font-bold">
-            같은 앱,
-            <br />
-            다른 하루
-          </h2>
-          <p className="text-ink-muted mt-5 text-sm">예시로 보는 세 사람의 사용 모습이에요.</p>
-        </div>
+      <Reveal>
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <Eyebrow>이런 분들이 써요</Eyebrow>
+            <h2 className="mt-5 text-4xl leading-snug font-bold">
+              같은 앱,
+              <br />
+              다른 하루
+            </h2>
+            <p className="text-ink-muted mt-5 text-sm">예시로 보는 세 사람의 사용 모습이에요.</p>
+          </div>
 
-        <ul className="space-y-5">
-          {personas.map((persona) => (
-            <li key={persona.tag} className="bg-surface rounded-2xl p-7">
-              <p className="text-primary text-xs font-bold">{persona.tag}</p>
-              <h3 className="mt-2 text-xl font-bold">{persona.title}</h3>
-              <p className="text-ink-muted mt-3 text-sm leading-relaxed">{persona.desc}</p>
-            </li>
-          ))}
-        </ul>
-      </Container>
+          <ul className="space-y-5">
+            {personas.map((persona) => (
+              <li key={persona.tag} className="bg-surface rounded-2xl p-7">
+                <p className="text-primary text-xs font-bold">{persona.tag}</p>
+                <h3 className="mt-2 text-xl font-bold">{persona.title}</h3>
+                <p className="text-ink-muted mt-3 text-sm leading-relaxed">{persona.desc}</p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -467,16 +485,19 @@ function Personas() {
 function Philosophy() {
   return (
     <section className="bg-surface py-28">
-      <Container>
-        <h2 className="text-5xl leading-[1.3] font-bold tracking-tight">
-          기능을 더 늘리기보다,
-          <br />
-          <span className="text-ink-muted/70">쓰는 사람에게 맞추는 것.</span>
-        </h2>
-        <p className="text-ink-muted mt-7 text-base">
-          사용자가 서비스에 맞추는 대신, 서비스가 사용자의 목적과 상황에 맞춰 달라지도록 만들었어요.
-        </p>
-      </Container>
+      <Reveal>
+        <Container>
+          <h2 className="text-5xl leading-[1.3] font-bold tracking-tight">
+            기능을 더 늘리기보다,
+            <br />
+            <span className="text-ink-muted/70">쓰는 사람에게 맞추는 것.</span>
+          </h2>
+          <p className="text-ink-muted mt-7 text-base">
+            사용자가 서비스에 맞추는 대신, 서비스가 사용자의 목적과 상황에 맞춰 달라지도록
+            만들었어요.
+          </p>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -486,50 +507,52 @@ function Faq() {
 
   return (
     <section id="faq" className="py-24">
-      <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-        <div>
-          <Eyebrow>자주 묻는 질문</Eyebrow>
-          <h2 className="mt-5 text-4xl leading-snug font-bold">
-            궁금한 점이
-            <br />
-            있으신가요?
-          </h2>
-        </div>
+      <Reveal>
+        <Container className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <Eyebrow>자주 묻는 질문</Eyebrow>
+            <h2 className="mt-5 text-4xl leading-snug font-bold">
+              궁금한 점이
+              <br />
+              있으신가요?
+            </h2>
+          </div>
 
-        <ul className="bg-surface rounded-2xl px-7">
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index
-            return (
-              <li key={faq.q} className={cn(index > 0 && 'border-line border-t')}>
-                <h3>
-                  <button
-                    type="button"
-                    aria-expanded={isOpen}
-                    onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                    className="flex w-full items-center justify-between gap-4 py-6 text-left text-sm font-bold"
+          <ul className="bg-surface rounded-2xl px-7">
+            {faqs.map((faq, index) => {
+              const isOpen = openIndex === index
+              return (
+                <li key={faq.q} className={cn(index > 0 && 'border-line border-t')}>
+                  <h3>
+                    <button
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                      className="flex w-full items-center justify-between gap-4 py-6 text-left text-sm font-bold"
+                    >
+                      {faq.q}
+                      <span className="text-ink-muted shrink-0" aria-hidden>
+                        {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                      </span>
+                    </button>
+                  </h3>
+                  <div
+                    aria-hidden={!isOpen}
+                    className={cn(
+                      'grid transition-[grid-template-rows] duration-300 ease-out',
+                      isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+                    )}
                   >
-                    {faq.q}
-                    <span className="text-ink-muted shrink-0" aria-hidden>
-                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                    </span>
-                  </button>
-                </h3>
-                <div
-                  aria-hidden={!isOpen}
-                  className={cn(
-                    'grid transition-[grid-template-rows] duration-300 ease-out',
-                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
-                  )}
-                >
-                  <p className="text-ink-muted overflow-hidden text-sm leading-relaxed">
-                    <span className={cn('block pb-6', isOpen ? '-mt-2' : 'mt-0')}>{faq.a}</span>
-                  </p>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      </Container>
+                    <p className="text-ink-muted overflow-hidden text-sm leading-relaxed">
+                      <span className={cn('block pb-6', isOpen ? '-mt-2' : 'mt-0')}>{faq.a}</span>
+                    </p>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+        </Container>
+      </Reveal>
     </section>
   )
 }
@@ -537,17 +560,19 @@ function Faq() {
 function Cta() {
   return (
     <section className="bg-surface py-28 text-center">
-      <Container>
-        <h2 className="text-4xl leading-snug font-bold">
-          지금의 나에게 맞는
-          <br />
-          Finder를 만들어보세요
-        </h2>
-        <Link to="/home" className="mt-10 inline-block">
-          <Button size="lg">무료로 시작하기</Button>
-        </Link>
-        <p className="text-ink-muted mt-5 text-xs">앱과 웹이 같은 설정을 써요</p>
-      </Container>
+      <Reveal>
+        <Container>
+          <h2 className="text-4xl leading-snug font-bold">
+            지금의 나에게 맞는
+            <br />
+            Finder를 만들어보세요
+          </h2>
+          <Link to="/home" className="mt-10 inline-block">
+            <Button size="lg">무료로 시작하기</Button>
+          </Link>
+          <p className="text-ink-muted mt-5 text-xs">앱과 웹이 같은 설정을 써요</p>
+        </Container>
+      </Reveal>
     </section>
   )
 }
