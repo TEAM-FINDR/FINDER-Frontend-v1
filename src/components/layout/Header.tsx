@@ -8,7 +8,7 @@ const navItems = [
   { to: '/explore', label: '탐색' },
   { to: '/my-path', label: 'My-Path' },
   { to: '/saved', label: '저장' },
-  { to: '/my', label: 'MY' },
+  { to: '/my/settings', label: 'MY' },
 ]
 
 export default function Header() {
