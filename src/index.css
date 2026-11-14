@@ -51,3 +51,13 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-on-scroll {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
