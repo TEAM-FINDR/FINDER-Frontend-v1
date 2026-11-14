@@ -391,7 +391,9 @@ export default function HomePage() {
         <ModeSwitch />
       </div>
 
-      {purpose === 'prepare' ? <PrepareMode /> : <ApplyMode />}
+      <div key={purpose} className="animate-fade-up">
+        {purpose === 'prepare' ? <PrepareMode /> : <ApplyMode />}
+      </div>
     </div>
   )
 }
