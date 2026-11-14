@@ -24,7 +24,7 @@ export default function SegmentedControl<T extends string>({
           aria-pressed={value === option.value}
           onClick={() => onChange(option.value)}
           className={cn(
-            'rounded-lg px-5 py-2 text-sm font-semibold transition-colors',
+            'flex-1 rounded-lg px-5 py-2 text-sm font-semibold transition-colors',
             value === option.value ? 'bg-surface text-ink' : 'text-ink-muted hover:text-ink',
           )}
         >
