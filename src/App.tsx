@@ -1,5 +1,12 @@
-function App() {
-  return <div className="p-6 text-2xl font-semibold">FINDER</div>
-}
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import HomePage from '@/pages/HomePage'
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
