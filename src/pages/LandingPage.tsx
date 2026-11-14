@@ -514,9 +514,17 @@ function Faq() {
                     </span>
                   </button>
                 </h3>
-                {isOpen && (
-                  <p className="text-ink-muted -mt-2 pb-6 text-sm leading-relaxed">{faq.a}</p>
-                )}
+                <div
+                  aria-hidden={!isOpen}
+                  className={cn(
+                    'grid transition-[grid-template-rows] duration-300 ease-out',
+                    isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+                  )}
+                >
+                  <p className="text-ink-muted overflow-hidden text-sm leading-relaxed">
+                    <span className={cn('block pb-6', isOpen ? '-mt-2' : 'mt-0')}>{faq.a}</span>
+                  </p>
+                </div>
               </li>
             )
           })}
