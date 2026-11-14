@@ -14,7 +14,7 @@ export default function LandingHeader() {
     <header className="bg-surface">
       <Container className="flex h-20 items-center">
         <Link to="/" className="text-xl font-bold">
-          Finder
+          FINDR
         </Link>
 
         <nav className="ml-10 hidden items-center gap-7 md:flex" aria-label="주요 메뉴">

@@ -172,7 +172,7 @@ function Hero() {
           <p className="text-ink-muted mt-6 text-base leading-relaxed">
             지금 바로 지원할 곳이 필요한 사람, 앞으로를 준비하는 사람, 그냥 둘러보고 싶은 사람
             <br />
-            Finder는 처음에 목적을 묻고, 그에 맞게 홈 화면과 보는 방식을 바꿔요.
+            FINDR는 처음에 목적을 묻고, 그에 맞게 홈 화면과 보는 방식을 바꿔요.
           </p>
           <Link to="/home" className="mt-9 inline-block">
             <Button size="lg">내 목적 고르고 시작하기</Button>
@@ -185,7 +185,7 @@ function Hero() {
               <div className="bg-surface rounded-2xl p-7">
                 <Eyebrow>처음 한 번만 물어봐요</Eyebrow>
                 <h2 className="mt-4 text-xl leading-snug font-bold">
-                  Finder를 어떤 목적으로
+                  FINDR를 어떤 목적으로
                   <br />
                   쓰실 건가요?
                 </h2>
@@ -567,7 +567,7 @@ function Cta() {
           <h2 className="text-4xl leading-snug font-bold">
             지금의 나에게 맞는
             <br />
-            Finder를 만들어보세요
+            FINDR를 만들어보세요
           </h2>
           <Link to="/home" className="mt-10 inline-block">
             <Button size="lg">무료로 시작하기</Button>
@@ -583,7 +583,7 @@ function Footer() {
   return (
     <footer className="py-10">
       <Container className="flex flex-wrap items-center justify-between gap-4">
-        <p className="text-ink-muted font-bold">Finder</p>
+        <p className="text-ink-muted font-bold">FINDR</p>
         <p className="text-ink-muted text-xs">이용약관 · 개인정보처리방침 · 문의하기</p>
       </Container>
     </footer>

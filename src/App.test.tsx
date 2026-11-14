@@ -13,7 +13,7 @@ function renderAt(path: string) {
 
 test.each([
   ['/', '같은 기회도'],
-  ['/onboarding', 'Finder를 어떤 목적으로 쓰실 건가요?'],
+  ['/onboarding', 'FINDR를 어떤 목적으로 쓰실 건가요?'],
   ['/home', '시우님이 지금 지원할 수 있는 기회예요'],
   ['/explore', '기회 탐색'],
   ['/opportunities/gwangju-youth-ai-camp', '광주 청소년 AI 캠프'],
