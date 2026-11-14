@@ -4,6 +4,7 @@ import ExplorePage from '@/pages/ExplorePage'
 import HomePage from '@/pages/HomePage'
 import LandingPage from '@/pages/LandingPage'
 import OnboardingPage from '@/pages/OnboardingPage'
+import SavedPage from '@/pages/SavedPage'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/saved" element={<SavedPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
